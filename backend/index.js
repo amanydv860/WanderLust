@@ -27,24 +27,15 @@ app.use(express.urlencoded({ extended: true })); // For form data
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
-const allowedOrigins = [
-    'http://localhost:5173',  // Local development
-    'https://wander-lust-tan.vercel.app' // Deployed frontend
-  ];
-
-
+// Allow specific origin
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin
-    // This can happen for example with mobile apps or curl requests
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  }
-}));
+    origin: 'https://wander-lust-eesjjtf2g-aman-yadavs-projects-34dacdaa.vercel.app', // Replace with your frontend URL
+    methods: 'GET,POST,PUT,DELETE', // Specify the methods you want to allow
+  }));
+  
+
+
+
 
 
 
