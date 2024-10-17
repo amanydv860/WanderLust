@@ -58,22 +58,22 @@ export default function Home() {
 
   return (
     <div className='mt-4'>
-      <div className="relative h-[20rem]">
-        <Link to="/listings">
-          <img
-            src="/img/addlisting.jpg"
-            alt="Sample Image"
-            className="object-cover w-full h-full"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center items-start text-center pl-10">
-            <p className="text-white text-lg">Best friends, great vacations</p>
-            <p className="text-white text-lg">Make your group trip</p>
-            <p className="text-white text-lg">Dreams come true</p>
-            <p className="text-white text-lg">Break free from your routine and play a little</p>
-            <p className="text-white text-3xl font-serif mt-4">Explore the hotels..</p>
-          </div>
-        </Link>
-      </div>
+     <div className="relative h-[20rem]">
+  <Link to="/listings">
+    <div
+      className="w-full h-full bg-cover bg-center"
+      style={{ backgroundImage: 'url(/img/addlisting.jpg)' }} // Inline style for background image
+    ></div>
+    <div className="absolute inset-0 flex flex-col justify-center items-start text-center pl-10">
+      <p className="text-white text-lg">Best friends, great vacations</p>
+      <p className="text-white text-lg">Make your group trip</p>
+      <p className="text-white text-lg">Dreams come true</p>
+      <p className="text-white text-lg">Break free from your routine and play a little</p>
+      <p className="text-white text-3xl font-serif mt-4">Explore the hotels..</p>
+    </div>
+  </Link>
+</div>
+
 
       {/* Display the 5-star listings here */}
       <div className='five-star-rating-hotel mt-10 p-4'>
