@@ -75,7 +75,7 @@ const EditListing = () => {
         return;
       }
 
-      await axios.put(`http://localhost:3000/api/listings/${id}`, data, {
+      await axios.put(`https://wanderlust-y0i4.onrender.com/api/listings/${id}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`, // Add your token here
@@ -158,7 +158,7 @@ const EditListing = () => {
         {currentImage && (
           <div className="mb-4">
             <p className="text-sm font-medium text-gray-700">Current Image:</p>
-            <img src={`http://localhost:3000${currentImage}`} alt="Current Listing" 
+            <img src={`https://wanderlust-y0i4.onrender.com${currentImage}`} alt="Current Listing" 
             className="mt-2 max-w-full h-60 object-cover rounded-md shadow-sm" />
           </div>
         )}

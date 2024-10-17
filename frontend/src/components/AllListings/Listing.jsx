@@ -89,7 +89,7 @@ const Listing = () => {
                 <h2 className="text-xl font-bold text-hc font-serif">{listing.title}</h2>
                 {listing.image && (
                   <img
-                    src={`http://localhost:3000${listing.image.url}`}
+                    src={`https://wanderlust-y0i4.onrender.com${listing.image.url}`}
                     alt={listing.title}
                     className="w-full h-40 object-cover mt-2 rounded "
                   />
