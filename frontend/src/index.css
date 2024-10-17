@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+.review-btn {
+    background-color: #6A6A6A !important; /* Example color */
+    color: white !important; /* Example color */
+  }
