@@ -7,6 +7,9 @@ import { Typography, Rating, Button } from '@mui/material';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -21,6 +24,13 @@ const ListingDetail = () => {
 
   // OpenCage API Key (You should sign up to get your key)
   const GEOCODING_API_KEY = '4ad131c26029450eacec35d8b5431380';
+
+  // Set default marker icons
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: markerIcon2x,
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+  });
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -153,8 +163,6 @@ const ListingDetail = () => {
             <p className='mt-2'><strong className='mr-2'>Country:</strong> {listing.country}</p>
             <p className='mt-2'><strong className='mr-2'>Price:</strong> ${listing.price} Per/Night</p>
             <p className='mt-2'><strong className='mr-2'>Created By:</strong> {listing.user.username}</p>
-            {/* <p className='mt-2'><strong className='mr-2'>Your User ID (Logged-in):</strong> {currentUser}</p> */}
-
 
             {/* Map Section */}
             <MapContainer center={coordinates} zoom={13} scrollWheelZoom={false} className="h-60 mt-4">
@@ -184,74 +192,43 @@ const ListingDetail = () => {
               </Link>
               </div>
             )}
-
-
-
           </div>
 
           {/* Review Form and Reviews Section */}
           <div className="w-full max-w-4xl">
-            {/* Review Form */}
-            <form onSubmit={handleReviewSubmit} className="my-4">
-              <h2 className="text-xl">Leave a Review</h2>
+            <h2 className="text-xl font-semibold mb-3">Reviews</h2>
+            {reviews.map((review) => (
+              <div key={review._id} className="border p-4 rounded shadow mb-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Typography variant="subtitle1" className='text-lg font-bold'>{review.user.username}</Typography>
+                    <Rating value={review.rating} precision={0.5} readOnly />
+                    <Typography variant="body1">{review.comment}</Typography>
+                  </div>
+                  {currentUser === review.user._id && (
+                    <Button variant="contained" color="secondary" onClick={() => handleDeleteReview(review._id)}>Delete</Button>
+                  )}
+                </div>
+              </div>
+            ))}
+            <form onSubmit={handleReviewSubmit} className="border p-4 rounded shadow">
+              <h2 className="text-xl font-semibold mb-3">Add a Review</h2>
+              <Rating
+                value={reviewRating}
+                onChange={(e, newValue) => setReviewRating(newValue)}
+              />
               <textarea
                 value={reviewComment}
                 onChange={(e) => setReviewComment(e.target.value)}
-                placeholder="Write your review..."
-                className="w-full border-2 border-gray-300 rounded-lg p-3 my-3 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out resize-none shadow-md"
-                rows="5"
-                required
+                className="w-full p-2 mt-2 border rounded"
+                placeholder="Write your review here"
               />
-              <div className='flex items-center space-x-4'>
-                <div className="mb-2">
-                  <Typography component="legend">Rating</Typography>
-                  <Rating
-                    name="simple-controlled"
-                    value={reviewRating}
-                    onChange={(event, newValue) => {
-                      setReviewRating(newValue);
-                    }}
-                    precision={0.5}
-                  />
-                </div>
-                <Button
-                  size='small'
-                  type='submit'
-                  className='review-btn'
-                  variant="contained">Submit Review
-                </Button>
-              </div>
+              <Button variant="contained" color="primary" type="submit" className="mt-3">Submit Review</Button>
             </form>
-
-            {/* Reviews Section */}
-            <div className='border-t-2'>
-              <h2 className="text-xl mt-4">Reviews</h2>
-              {reviews.length === 0 ? (
-                <p>No reviews yet.</p>
-              ) : (
-                <ul className='grid grid-cols-2 gap-1'>
-                  {reviews.map((review) => (
-                    <li key={review._id} className="border p-3 my-2 rounded max-h-32 overflow-auto break-words">
-                      <p><strong>{review.user.username}</strong></p>
-                      <Rating value={review.rating} readOnly precision={0.5} className='mr-3' />
-                      <p className='text-wrap'>{review.comment}</p>
-                      {review.user._id === currentUser && (
-                        <button
-                          onClick={() => handleDeleteReview(review._id)}
-                          className="bg-red-500 text-white px-2 py-1 rounded mt-2"
-                        >
-                          Delete
-                        </button>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
           </div>
         </div>
       ) : (
-        <p>Loading listing...</p>
+        <div>Loading...</div>
       )}
     </div>
   );
