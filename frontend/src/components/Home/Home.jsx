@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Rating } from '@mui/material'; // Import Rating from Material UI
+import addListingImage from '../img/addListingimage.avif'; // Adjust the path as necessary
 
 export default function Home() {
   const [fiveStarListings, setFiveStarListings] = useState([]);
@@ -60,7 +61,7 @@ export default function Home() {
       <div className="relative h-[20rem]">
         <Link to="/listings">
           <img
-            src="\src\img\explorehotelimage.avif"
+            src="/img/maldives2.jpeg"
             alt="Sample Image"
             className="object-cover w-full h-full"
           />
@@ -111,7 +112,7 @@ export default function Home() {
       <div className="relative h-[20rem]">
         <Link to="/add-listing">
           <img
-            src="\src\img\addListingimage.avif"
+            src="\img\addListingimage.avif"
             alt="Sample Image"
             className="object-cover w-full h-full"
           />
