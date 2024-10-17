@@ -28,10 +28,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 // Allow specific origin
-app.use(cors({
-    origin: 'https://wander-lust-eesjjtf2g-aman-yadavs-projects-34dacdaa.vercel.app', // Replace with your frontend URL
-    methods: 'GET,POST,PUT,DELETE', // Specify the methods you want to allow
-  }));
+app.use(cors());
   
 
 
