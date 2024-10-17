@@ -61,7 +61,7 @@ export default function Home() {
       <div className="relative h-[20rem]">
         <Link to="/listings">
           <img
-            src="\img\addlisting.jpg"
+            src="/img/addlisting.jpg"
             alt="Sample Image"
             className="object-cover w-full h-full"
           />
@@ -112,7 +112,7 @@ export default function Home() {
       <div className="relative h-[20rem]">
         <Link to="/add-listing">
           <img
-            src="/img\maldives2.jpeg"
+            src="/img/maldives2.jpeg"
             alt="Sample Image"
             className="object-cover w-full h-full"
           />
