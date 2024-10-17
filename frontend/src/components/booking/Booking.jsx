@@ -25,7 +25,7 @@ export default function Booking() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:3000/api/bookings', bookingData, {
+      await axios.post('https://wanderlust-y0i4.onrender.com/api/bookings', bookingData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

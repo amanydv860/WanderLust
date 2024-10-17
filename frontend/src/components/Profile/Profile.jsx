@@ -11,7 +11,7 @@ export default function Profile() {
         const fetchUserProfile = async () => {
             const userId = localStorage.getItem('userId');
             try {
-                const response = await axios.get(`http://localhost:3000/api/users/userProfile/${userId}`);
+                const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/users/userProfile/${userId}`);
                 setUserProfile(response.data);
             } catch (err) {
                 setError(err.response?.data?.message || 'Error fetching profile');
@@ -31,7 +31,7 @@ export default function Profile() {
         const userId = localStorage.getItem('userId');
         if (window.confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
             try {
-                await axios.delete(`http://localhost:3000/api/users/deleteProfile/${userId}`);
+                await axios.delete(`https://wanderlust-y0i4.onrender.com/api/users/deleteProfile/${userId}`);
                 alert("Profile deleted successfully.");
                 handleLogout();
             } catch (err) {

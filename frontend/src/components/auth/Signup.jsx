@@ -19,7 +19,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       SetLoading(true)
-      const res = await axios.post("http://localhost:3000/api/users/signup", {
+      const res = await axios.post("https://wanderlust-y0i4.onrender.com/api/users/signup", {
         email: email,
         password: password,
         username: username

@@ -12,7 +12,7 @@ export default function UserBookings() {
     const fetchBookings = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:3000/api/bookings', {
+        const response = await axios.get('https://wanderlust-y0i4.onrender.com/api/bookings', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -33,7 +33,7 @@ export default function UserBookings() {
     console.log('Attempting to delete booking with ID:', bookingId); // Add this line to verify bookingId
 
     try {
-      await axios.delete(`http://localhost:3000/api/bookings/bookings/${bookingId}`, {
+      await axios.delete(`https://wanderlust-y0i4.onrender.com/api/bookings/bookings/${bookingId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

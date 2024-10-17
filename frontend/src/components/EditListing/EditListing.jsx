@@ -19,7 +19,7 @@ const EditListing = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/listings/${id}`);
+        const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/listings/${id}`);
         setFormData({
           title: response.data.title,
           description: response.data.description,

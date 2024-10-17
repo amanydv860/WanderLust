@@ -19,7 +19,7 @@ const AddListing = () => {
 
       // console.log("Token being sent:", token); // Debug log to check token
 
-      const response = await axios.post("http://localhost:3000/api/listings", formData, {
+      const response = await axios.post("https://wanderlust-y0i4.onrender.com/api/listings", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`, // Make sure this header is included

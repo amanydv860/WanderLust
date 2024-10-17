@@ -25,7 +25,7 @@ const ListingDetail = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/listings/${id}`);
+        const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/listings/${id}`);
         setListing(response.data);
 
         // Fetch coordinates using geocoding API for the location and country
@@ -41,7 +41,7 @@ const ListingDetail = () => {
         }
 
         // Fetch reviews after getting the listing
-        const reviewsResponse = await axios.get(`http://localhost:3000/api/reviews/${id}`);
+        const reviewsResponse = await axios.get(`https://wanderlust-y0i4.onrender.com/api/reviews/${id}`);
         setReviews(reviewsResponse.data);
       } catch (err) {
         setError('Error fetching listing details');
@@ -55,7 +55,7 @@ const ListingDetail = () => {
   const handleDeleteListing = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:3000/api/listings/${id}`, {
+      await axios.delete(`https://wanderlust-y0i4.onrender.com/api/listings/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -87,13 +87,13 @@ const ListingDetail = () => {
         user: currentUser,
       };
 
-      await axios.post(`http://localhost:3000/api/reviews`, newReview, {
+      await axios.post(`https://wanderlust-y0i4.onrender.com/api/reviews`, newReview, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      const reviewsResponse = await axios.get(`http://localhost:3000/api/reviews/${id}`);
+      const reviewsResponse = await axios.get(`https://wanderlust-y0i4.onrender.com/api/reviews/${id}`);
       setReviews(reviewsResponse.data);
       setReviewComment('');
       setReviewRating(1);
@@ -110,7 +110,7 @@ const ListingDetail = () => {
         return;
       }
 
-      await axios.delete(`http://localhost:3000/api/reviews/${reviewId}`, {
+      await axios.delete(`https://wanderlust-y0i4.onrender.com/api/reviews/${reviewId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -144,7 +144,7 @@ const ListingDetail = () => {
             <p className='font-thin text-pc'>{listing.description}</p>
             {listing.image && (
               <img
-                src={`http://localhost:3000${listing.image.url}`}
+                src={`https://wanderlust-y0i4.onrender.com${listing.image.url}`}
                 alt={listing.title}
                 className="w-full bg-cover h-60 mt-4 rounded object-cover"
               />

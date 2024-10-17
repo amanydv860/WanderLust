@@ -24,7 +24,7 @@ export default function Login() {
     
     try {
       setLoading(true);  // Start loading state
-      const res = await axios.post("http://localhost:3000/api/users/login", {
+      const res = await axios.post("https://wanderlust-y0i4.onrender.com/api/users/login", {
         email,
         password,
       });

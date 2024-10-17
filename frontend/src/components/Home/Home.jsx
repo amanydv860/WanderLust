@@ -13,10 +13,10 @@ export default function Home() {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/listings');
+        const response = await axios.get('https://wanderlust-y0i4.onrender.com/api/listings');
         const listingsWithReviews = await Promise.all(
           response.data.map(async (listing) => {
-            const reviewsResponse = await axios.get(`http://localhost:3000/api/reviews/${listing._id}`);
+            const reviewsResponse = await axios.get(`https://wanderlust-y0i4.onrender.com/api/reviews/${listing._id}`);
             return { ...listing, reviews: reviewsResponse.data };
           })
         );
@@ -85,7 +85,7 @@ export default function Home() {
                   <h3 className="text-lg font-bold">{listing.title}</h3>
                   {listing.image && (
                     <img
-                      src={`http://localhost:3000${listing.image.url}`}
+                      src={`https://wanderlust-y0i4.onrender.com${listing.image.url}`}
                       alt={listing.title}
                       className="w-full h-40 object-cover mt-2 rounded"
                     />
@@ -132,7 +132,7 @@ export default function Home() {
                   <h3 className="text-lg font-bold">{listing.title}</h3>
                   {listing.image && (
                     <img
-                      src={`http://localhost:3000${listing.image.url}`}
+                      src={`https://wanderlust-y0i4.onrender.com${listing.image.url}`}
                       alt={listing.title}
                       className="w-full h-40 object-cover mt-2 rounded"
                     />
@@ -166,7 +166,7 @@ export default function Home() {
                   <h3 className="text-lg font-bold">{listing.title}</h3>
                   {listing.image && (
                     <img
-                      src={`http://localhost:3000${listing.image.url}`}
+                      src={`https://wanderlust-y0i4.onrender.com${listing.image.url}`}
                       alt={listing.title}
                       className="w-full h-40 object-cover mt-2 rounded"
                     />

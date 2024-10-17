@@ -14,10 +14,10 @@ const Listing = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/listings');
+        const response = await axios.get('https://wanderlust-y0i4.onrender.com/api/listings');
         const listingsWithReviews = await Promise.all(
           response.data.map(async (listing) => {
-            const reviewsResponse = await axios.get(`http://localhost:3000/api/reviews/${listing._id}`);
+            const reviewsResponse = await axios.get(`https://wanderlust-y0i4.onrender.com/api/reviews/${listing._id}`);
             return { ...listing, reviews: reviewsResponse.data };
           })
         );
