@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import * as jwtDecode from 'jwt-decode'; // Correcting the import
 
 export default function Profile() {
     const [userProfile, setUserProfile] = useState({});
@@ -9,17 +10,43 @@ export default function Profile() {
 
     useEffect(() => {
         const fetchUserProfile = async () => {
+            const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
+
+            // Check if the token exists
+            if (!token) {
+                handleLogout();
+                return;
+            }
+
             try {
-                const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/users/userProfile/${userId}`);
-                setUserProfile(response.data);
+                // Decode the token to check its expiration
+                const decodedToken = jwtDecode(token);
+                const currentTime = Date.now() / 1000; // Current time in seconds
+
+                if (decodedToken.exp < currentTime) {
+                    // Token has expired, auto-logout the user
+                    handleLogout();
+                } else {
+                    // Fetch the user profile if the token is valid
+                    const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/users/userProfile/${userId}`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    setUserProfile(response.data);
+
+                    // Optionally set a timeout to auto-logout when the token expires
+                    const timeUntilExpiry = decodedToken.exp * 1000 - Date.now();
+                    setTimeout(() => {
+                        handleLogout();
+                    }, timeUntilExpiry);
+                }
             } catch (err) {
                 setError(err.response?.data?.message || 'Error fetching profile');
                 console.error('Fetching error:', err);
             }
         };
         fetchUserProfile();
-    }, []);
+    }, [navigate]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');

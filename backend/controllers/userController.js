@@ -51,7 +51,7 @@ async function signup(req, res) {
         const token = jwt.sign(
             { id: result.insertedId },
             process.env.JWT_SECRET_KEY,
-            { expiresIn: "8h" }
+            { expiresIn: "2h" }
         );
 
         res.json({ token, userId: result.insertedId });
@@ -87,7 +87,7 @@ async function login(req, res) {
         const token = jwt.sign(
             { id: user._id },
             process.env.JWT_SECRET_KEY,
-            { expiresIn: "8h" }
+            { expiresIn: "2h" }
         );
 
         // Send token and userId
