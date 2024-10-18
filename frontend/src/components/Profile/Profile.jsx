@@ -12,7 +12,7 @@ export default function Profile() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             const userId = localStorage.getItem('userId');
-            
+
             if (!userId) {
                 setError("User ID not found");
                 setLoading(false);
@@ -57,7 +57,7 @@ export default function Profile() {
     };
 
     return (
-        <div className="flex justify-center p-4">
+        <div className="flex justify-end p-4">
             <div className="border p-6 rounded shadow-lg w-full max-w-lg">
                 {/* Conditional Rendering based on loading or error */}
                 {loading ? (
@@ -79,20 +79,23 @@ export default function Profile() {
                         </div>
 
                         {/* Logout Button */}
-                        <button
-                            onClick={handleLogout}
-                            className="mt-6 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        >
-                            Logout
-                        </button>
+                        <div className="mt-6 space-x-2">
+                            {/* Logout Button */}
+                            <button
+                                onClick={handleLogout}
+                                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                            >
+                                Logout
+                            </button>
 
-                        {/* Delete Profile Button */}
-                        <button
-                            onClick={handleDeleteProfile}
-                            className="mt-6 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        >
-                            Delete Profile
-                        </button>
+                            {/* Delete Profile Button */}
+                            <button
+                                onClick={handleDeleteProfile}
+                                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                            >
+                                Delete Profile
+                            </button>
+                        </div>
                     </>
                 )}
             </div>
