@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import * as jwtDecode from 'jwt-decode'; // Correcting the import
+import jwtDecode from 'jwt-decode'; // Corrected import
 
 export default function Profile() {
     const [userProfile, setUserProfile] = useState({});
@@ -41,12 +41,12 @@ export default function Profile() {
                     }, timeUntilExpiry);
                 }
             } catch (err) {
+                console.error('Fetching error:', err); // Log detailed error
                 setError(err.response?.data?.message || 'Error fetching profile');
-                console.error('Fetching error:', err);
             }
         };
         fetchUserProfile();
-    }, [navigate]);
+    }, []); // Empty dependency array, no need for navigate
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -62,8 +62,8 @@ export default function Profile() {
                 alert("Profile deleted successfully.");
                 handleLogout();
             } catch (err) {
+                console.error('Deletion error:', err); // Log detailed error
                 setError('Error deleting profile');
-                console.error('Deletion error:', err);
             }
         }
     };
