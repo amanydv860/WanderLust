@@ -22,10 +22,8 @@ const ListingDetail = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  // OpenCage API Key (You should sign up to get your key)
   const GEOCODING_API_KEY = '4ad131c26029450eacec35d8b5431380';
 
-  // Set default marker icons
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: markerIcon2x,
     iconUrl: markerIcon,
@@ -38,19 +36,16 @@ const ListingDetail = () => {
         const response = await axios.get(`https://wanderlust-y0i4.onrender.com/api/listings/${id}`);
         setListing(response.data);
 
-        // Fetch coordinates using geocoding API for the location and country
         const locationString = `${response.data.location}, ${response.data.country}`;
         const geocodingResponse = await axios.get(
           `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(locationString)}&key=${GEOCODING_API_KEY}`
         );
 
-        // Update the map coordinates with the fetched latitude and longitude
         if (geocodingResponse.data.results.length > 0) {
           const { lat, lng } = geocodingResponse.data.results[0].geometry;
           setCoordinates([lat, lng]);
         }
 
-        // Fetch reviews after getting the listing
         const reviewsResponse = await axios.get(`https://wanderlust-y0i4.onrender.com/api/reviews/${id}`);
         setReviews(reviewsResponse.data);
       } catch (err) {
@@ -132,11 +127,10 @@ const ListingDetail = () => {
     }
   };
 
-  // Component to update the map view when coordinates change
   const SetViewOnCoordinatesChange = () => {
     const map = useMap();
     useEffect(() => {
-      map.setView(coordinates, 13); // Set the view to the fetched coordinates
+      map.setView(coordinates, 13);
     }, [coordinates, map]);
     return null;
   };
@@ -144,12 +138,12 @@ const ListingDetail = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className='flex flex-col  items-center mb-8'>
+    <div className='flex flex-col items-center mb-8'>
       {listing ? (
-        <div className='w-1/2'>
+        <div className='w-full sm:w-4/5 lg:w-3/5 xl:w-2/5'>
           {/* Listing Details Section */}
-          <div className="border p-8 rounded shadow w-full max-w-4xl mb-8">
-            <Link to="/listings"> <IoMdArrowBack size={24} /></Link>
+          <div className="border p-8 rounded shadow w-full mb-8">
+            <Link to="/listings"><IoMdArrowBack size={24} /></Link>
             <h1 className="text-2xl font-bold space-x-1 mt-3">{listing.title}</h1>
             <p className='font-thin text-pc'>{listing.description}</p>
             {listing.image && (
@@ -180,16 +174,16 @@ const ListingDetail = () => {
 
             {listing.user._id === currentUser && (
               <div className="my-5 space-x-4 flex">
-                <button onClick={handleDeleteListing} className="bg-mc text-white px-4 py-1 rounded">Delete</button>
-                <button onClick={() => navigate(`/listing/${id}/edit`)} className="bg-pc text-white px-4 py-1 rounded">Edit</button>
+                <button onClick={handleDeleteListing} className="bg-red-500 text-white px-4 py-1 rounded">Delete</button>
+                <button onClick={() => navigate(`/listing/${id}/edit`)} className="bg-blue-500 text-white px-4 py-1 rounded">Edit</button>
               </div>
             )}
             {/* Book Now button */}
             {listing.user._id !== currentUser && (
-            <div className="my-2">
-              <Link to={`/listing/${id}/book`}>
-                <button className="bg-blue-500 text-white px-4 py-1 rounded">Book Now</button>
-              </Link>
+              <div className="my-2">
+                <Link to={`/listing/${id}/book`}>
+                  <button className="bg-green-500 text-white px-4 py-1 rounded">Book Now</button>
+                </Link>
               </div>
             )}
           </div>
